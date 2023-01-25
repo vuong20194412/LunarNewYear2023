@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Digital Clock </title>
+</head>
+
+<body id="body" class="layout-center">
+  <style>
+    #div1 {
+      background-color: #0000001a;
+    }
+  </style>
+  <div id="div1" class="flex-col-center-y gap-2 px-8 py-4 rounded text-white">
+    <p id="para1" class="font-bold my-0 text-6xl text-center">Thứ Tư, 25/01/2023</p>
+    <p id="para2" class="font-bold my-0 text-8xl text-center">01:09:03</p>
+  </div>
+  <script src="..\normalize.css.js" defer=""></script>
+  <script src="digitalClock.css.js" defer=""></script>
+  <script src="..\myFuns.js" defer=""></script>
+  <script defer="">
+    date = document.getElementById('para1');
+    time = document.getElementById('para2');
+    setInterval(() => {
+      datetime = formatDate(Date.now() + 100, 'vi-VN')
+      date.innerHTML = `${datetime.day}, ${datetime.date}`;
+      time.innerHTML = datetime.time;
+    }, 1000);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Sliders Image </title>
+</head>
+
+<body class="layout-center">
+  <div class="flex-col-center-x gap-8">
+    <style>
+      #div1 {
+        height: 200px;
+        width: 400px;
+      }
+    </style>
+    <div id="div1" class="border-1 border-black flex-center-y relative rounded">
+      <input type="button" value="❮" onclick="slideImage(-1)"
+        class="absolute bg-transparent border-0 hover:bg-gray-100 size-10 left-0 rounded-r select-none" />
+      <input type="button" value="❯" onclick="slideImage(1)"
+        class="absolute bg-transparent border-0 hover:bg-gray-100 size-10 right-0 rounded-l select-none" />
+      <img class="size-full" src="images\circle.svg" alt="wait load">
+      <img class="size-full" src="images\rectangle.svg" hidden alt="wait load">
+      <img class="size-full" src="images\ellipse.svg" hidden alt="wait load">
+      <img class="size-full" src="images\star.svg" hidden alt="wait load">
+      <img class="size-full" src="images\line.svg" hidden alt="wait load">
+    </div>
+    <span id="span1">
+      <input type="button"
+        class="bg-gray-100 border-0 size-4 inline-block mx-1 rounded-round duration-500 transition-bg-color"
+        title="change">
+      <input type="button"
+        class="bg-gray-100 border-0 size-4 inline-block mx-1 rounded-round duration-500 transition-bg-color"
+        title="change">
+      <input type="button"
+        class="bg-gray-100 border-0 size-4 inline-block mx-1 rounded-round duration-500 transition-bg-color"
+        title="change">
+      <input type="button"
+        class="bg-gray-100 border-0 size-4 inline-block mx-1 rounded-round duration-500 transition-bg-color"
+        title="change">
+      <input type="button"
+        class="bg-gray-100 border-0 size-4 inline-block mx-1 rounded-round duration-500 transition-bg-color"
+        title="change">
+    </span>
+  </div>
+
+  <script src="..\normalize.css.js" defer></script>
+  <script src="slidersImage.css.js" defer></script>
+  <script src="..\myFuns.js" defer></script>
+  <script defer>
+    imgs = document.getElementById('div1').getElementsByTagName('img');
+    dots = document.getElementById('span1').getElementsByTagName('input');
+    currentImgIndex = undefined;
+    imgLastIndex = imgs.length - 1;
+    for (let i = 0; i <= imgLastIndex; i++) {
+      if (!imgs[i].hasAttribute('hidden')) {
+        currentImgIndex = i;
+        dots[i % 5].classList.add("bg-gray-500");
+        break;
+      }
+    }
+    /**
+     * @param {number} direction
+     * direction = +1 to next
+     * direction = -1 to pre
+    */
+    function slideImage(direction) {
+      if (Number.isInteger(direction)) {
+        dots[currentImgIndex % 5].classList.remove("bg-gray-500");
+        imgs[currentImgIndex].setAttribute('hidden', '');
+
+        currentImgIndex += direction;
+        if (direction > 0) {
+          if (currentImgIndex > imgLastIndex) currentImgIndex = 0;
+        }
+        else if (direction < 0) {
+          if (currentImgIndex < 0) currentImgIndex = imgLastIndex;
+        }
+
+        imgs[currentImgIndex].removeAttribute('hidden');
+        dots[currentImgIndex % 5].classList.add("bg-gray-500");
+      }
+    }
+  </script>
+</body>
+
+</html>

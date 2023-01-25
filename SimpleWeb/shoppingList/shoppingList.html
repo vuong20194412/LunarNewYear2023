@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Shopping List </title>
+</head>
+
+<body id="body" class="layout-center">
+  <style>
+    #div1 {
+      width: 600px;
+    }
+  </style>
+  <div id="div1" class="bg-white flex-col-center-x gap-4 min-h-screen">
+    <p class="font-bold text-2xl">Grocery List</p>
+    <div class="w-4/5">
+      <span class="flex-center-y gap-4 mb-2">
+        <input type="button" value="remove list" onclick="removeList()"
+          class="bg-pink-200 border-0 capitalize px-2 py-1 rounded text-base text-white">
+        <input id="input1" placeholder="item"
+          class="border-0 border-b-2 border-b-gray-900 outline-0 px-1 text-base w-full">
+      </span>
+      <style>
+        #ul1 {
+          list-style-type: var(--list-style-type);
+        }
+      </style>
+      <ul id="ul1" class="px-4 w-full">
+      </ul>
+    </div>
+  </div>
+
+  <script src="..\normalize.css.js" defer></script>
+  <script src="shoppingList.css.js" defer></script>
+  <script src="..\myFuns.js" defer></script>
+  <script defer>
+    input = document.getElementById("input1");
+    ul = document.getElementById("ul1");
+
+    input.addEventListener('keyup', function (event) {
+      if (event.key == 'Enter') {
+        li = document.createElement('li');
+        li.classList.add('cursor-pointer', 'font-bold', 'text-xl');
+        li.innerHTML = this.value;
+        li.addEventListener('click', function () {
+          if (this.classList.contains("line-through")) {
+            this.classList.remove("line-through");
+          }
+          else {
+            this.classList.add("line-through");
+          }
+        });
+
+        ul.appendChild(li);
+        
+        this.value = "";
+      }
+    });
+
+    var removeList = () => ul.innerHTML = '';
+  </script>
+</body>
+
+</html>
